@@ -3,6 +3,7 @@ package ru.philimonov.models;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 public class Person {
@@ -19,14 +20,20 @@ public class Person {
     @Email(message = "Email should be valid!!!")
     private String email;
 
+    //Country, City, Post code(6 digits)
+    //Russia, Moscow, 123456
+    @Pattern(regexp = "[A-Z]\\w+, [A-Z]\\w+, \\d{6}", message = "Your address should be in this format: Country, City, Post code (6 digits)")
+    private String address;
+
     public Person() {
     }
 
-    public Person(int id, String name, int age, String email) {
+    public Person(int id, String name, int age, String email, String address) {
         this.id = id;
         this.name = name;
         this.age = age;
         this.email = email;
+        this.address = address;
     }
 
     public int getId() {
@@ -59,5 +66,13 @@ public class Person {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 }
