@@ -1,6 +1,7 @@
 package ru.philimonov.springcourse.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import ru.philimonov.dao.BookDAO;
 import ru.philimonov.dao.PersonDAO;
 import ru.philimonov.models.Book;
@@ -17,6 +19,8 @@ import ru.philimonov.models.Person;
 import javax.validation.Valid;
 import java.util.Optional;
 
+@Controller
+@RequestMapping("/books")
 public class BooksController {
     private BookDAO bookDAO;
     private PersonDAO personDAO;
@@ -35,7 +39,7 @@ public class BooksController {
 
     @GetMapping("/{id}")
     public String show(@PathVariable(value = "id") int id, Model model, @ModelAttribute("person") Person person) {
-        //Получим одного человека по id из DAO и передадим на отображение в представление
+
         model.addAttribute("book", bookDAO.show(id));
         Optional<Person> bookOwner = bookDAO.getBookOwner(id);
         if (bookOwner.isPresent()) {
@@ -81,6 +85,11 @@ public class BooksController {
         return "redirect:/books";
     }
 
+    @PatchMapping("/{id}/release")
+    public String assign(@PathVariable("id") int id) {
+        bookDAO.release(id);
+        return "redirect:/books/" + id;
+    }
     @PatchMapping
     public String assign(@PathVariable("id") int id, @ModelAttribute("person") Person selectedPerson) {
         bookDAO.assign(id, selectedPerson);
