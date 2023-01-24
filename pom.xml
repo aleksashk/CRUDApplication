@@ -65,16 +65,26 @@
       <artifactId>hibernate-validator</artifactId>
       <version>6.2.5.Final</version>
     </dependency>
-
-    <dependency>
-      <groupId>org.postgresql</groupId>
-      <artifactId>postgresql</artifactId>
-      <version>42.5.1</version>
-    </dependency>
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-jdbc</artifactId>
       <version>5.3.24</version>
+    </dependency>
+    <dependency>
+      <groupId>org.postgresql</groupId>
+      <artifactId>postgresql</artifactId>
+      <version>42.2.27</version>
+    </dependency>
+    <dependency>
+      <groupId>org.hibernate</groupId>
+      <artifactId>hibernate-tools-maven-plugin</artifactId>
+      <version>5.4.29.Final</version>
+      <type>maven-plugin</type>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-orm</artifactId>
+      <version>6.0.2</version>
     </dependency>
   </dependencies>
 
